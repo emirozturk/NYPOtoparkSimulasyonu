@@ -1,4 +1,4 @@
-﻿class NYPOtoparkSimulasyonu
+﻿class OtoparkSimulasyon
 {
     public static void Main(String[] args)
     {
