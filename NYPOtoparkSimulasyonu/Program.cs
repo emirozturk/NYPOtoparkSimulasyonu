@@ -9,7 +9,7 @@ class OtoparkSimulasyon
             Sutun = 5,
             BirimFiyat = 10,
             KuyrukUzunlugu = 10,
-            AdimdaMaxAracSayisi = 5,
+            AdimdaMaxAracSayisi = 8,
             MaxAracOtoparkSuresi = 20,
             MaxAracKuyrukSuresi = 5,
             
@@ -17,6 +17,6 @@ class OtoparkSimulasyon
         var otopark = new Otopark(config.Satir, config.Sutun, config.BirimFiyat);
         var kuyruk = new Kuyruk(config.KuyrukUzunlugu);
         var dongu = new TemelDongu(config,otopark,kuyruk);
-        dongu.Baslat(5);
+        dongu.Baslat(3);
     }
 }

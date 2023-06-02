@@ -22,6 +22,7 @@ public class TemelDongu
         while (true)
         {
             List<Arac> gelenAraclar = RastgeleAracBelirle(config.AdimdaMaxAracSayisi);
+            List<Arac> gelenlerinyedegi = new List<Arac>(gelenAraclar);
             List<Arac> cikanAraclar = otopark.CikislariYap();
             while (gelenAraclar.Count > 0 && otopark.BosYerVarMi())
             {
@@ -40,17 +41,31 @@ public class TemelDongu
             zarar += gelenAraclar.Count * config.BirimFiyat;
             zarar += kuyruktanCikanlar.Count * config.BirimFiyat;
 
-            DurumGoster();
+            DurumGoster(gelenlerinyedegi,cikanAraclar,kuyruktanCikanlar);
             
             Thread.Sleep(AdimSuresi*1000);
         }
     }
 
-    private void DurumGoster()
+    private void DurumGoster(List<Arac> gelenAraclar, List<Arac> cikanAraclar, List<Arac> kuyruktanCikanlar)
     {
-        throw new NotImplementedException();
-    }
+        Console.WriteLine();
+        Console.WriteLine("Gelen araçlar:");
+        foreach(var gelenArac in gelenAraclar)
+            Console.WriteLine($"Plaka: {gelenArac.Plaka} Otopark Süresi: {gelenArac.OtoparkSuresi} Kuyruk Süresi: {gelenArac.KuyrukSuresi}");
+        Console.WriteLine("Otoparktan çıkan araçlar:");
+        foreach(var cikanArac in cikanAraclar)
+            Console.WriteLine($"Plaka: {cikanArac.Plaka}");
+        Console.WriteLine("Kuyruktan çıkan araçlar:");
+        foreach(var cikanArac in kuyruktanCikanlar)
+            Console.WriteLine($"Plaka: {cikanArac.Plaka}");
+        otopark.DurumGoster();
+        kuyruk.DurumGoster();
+        Console.WriteLine($"Kar  :{kar,5} TL");
+        Console.WriteLine($"Zarar:{zarar,5} TL");
 
+    }
+    
     private List<Arac> RastgeleAracBelirle(int AdimdaMaxAracSayisi)
     {
         var aracSayisi = new Random().Next(0, AdimdaMaxAracSayisi+1);
